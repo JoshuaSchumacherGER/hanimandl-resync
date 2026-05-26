@@ -1,77 +1,131 @@
-# HaniMandl
+# 🍯 HaniMandl-resync 🔄
 
-![PlatformIO CI](https://github.com/hiveeyes/hanimandl/workflows/PlatformIO%20CI/badge.svg)
-![Documentation](https://readthedocs.org/projects/hanimandl/badge/)
-![Version](https://img.shields.io/github/v/tag/hiveeyes/hanimandl.svg)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![Platform: ESP32-S3](https://img.shields.io/badge/Platform-ESP32--S3-orange.svg)](https://www.espressif.com/en/products/socs/esp32-s3)
+[![Status: Under Development](https://img.shields.io/badge/Status-Roadmap%20%26%20Active%20Dev-green.svg)](#roadmap)
 
-[![Arduino CI](https://github.com/hiveeyes/hanimandl/workflows/Arduino%20CI/badge.svg)](https://github.com/marketplace/actions/arduino_ci)
+Ein moderner, leistungsstarker und zukunftssicherer Fork des legendären **HaniMandl** – dem halbautomatischen Honig-Abfüll-Roboter. 
 
-[de] Ein halbautomatischer Honig-Abfüll-Roboter.
-<br/>
-[en] A semi-automatic honey filling robot.
+---
 
-![image](https://community.hiveeyes.org/uploads/default/optimized/2X/4/4cab90a77589485ebf0a2629a05b222a7cf9c84d_2_1380x776.jpeg)
+## 📖 Was ist der HaniMandl?
 
-> [!TIP]
-> The [HaniMandl Documentation] is the canonical source of information about
-> the HaniMandl open source project, and also refers to relevant projects
-> derived from it.
+Der **HaniMandl** ist ein unverzichtbarer Helfer für Imkerinnen und Imker im deutschsprachigen Raum und darüber hinaus. Es handelt sich um ein Open-Source-Projekt für einen **halbautomatischen Honig-Abfüll-Roboter**. 
 
-## Acknowledgements
+Mithilfe einer präzisen digitalen Waage (Load Cell mit HX711) und einem leistungsstarken Servo-Motor öffnet und schließt das Gerät den Quetschhahn des Abfüllkübels vollautomatisch. Sobald ein leeres Glas auf der Waage steht, tariert sich das System, öffnet das Ventil und stoppt den Abfüllprozess grammgenau bei Erreichen des Zielgewichts – inklusive intelligenter Autokorrektur des Nachlaufs.
 
-This project would not exist without Marc Vasterling conceiving it,
-and without the countless contributions it received throughout the
-years. Thanks to everyone who contributed, in the order of appearance:
+---
 
-Marc Vasterling, Marc Wetzel, Clemens Gruber, Andreas Holzhammer,
-Marc Junker, Johannes Kuder, Jeremias Bruker, Andreas Motl.
+## ⚖️ Warum dieser Fork? ("Hanimandl-resync")
 
+Das Originalprojekt ist ein Geniestreich der Open-Source-Imkerei. Allerdings steht die Entwicklung des Originals seit geraumer Zeit nahezu still. Die Codebasis ist veraltet, unterstützt neue Mikrocontroller nur mangelhaft und das Benutzererlebnis entspricht nicht mehr modernsten Standards. 
 
-## Project information
+**Hanimandl-resync** wurde ins Leben gerufen, um dieses großartige Projekt aus dem Dornröschenschlaf zu wecken. Wir überführen die bewährte Abfüll-Logik auf eine moderne Hardware-Plattform und fügen essenzielle Sicherheits- und Komfortfunktionen hinzu, die den Abfüllalltag revolutionieren.
 
-### Contributions
+---
 
-Every kind of contribution, feedback, or patch, is much welcome. [Create an
-issue] or submit a patch if you think we should include a new feature, or to
-report or fix a bug.
+## ⚡ Die Evolution: Original vs. HaniMandl-resync
 
-### Development
+| Feature | 🦖 Das Original | 🚀 HaniMandl-resync |
+| :--- | :--- | :--- |
+| **Mikrocontroller** | Heltec WiFi Kit 32 (V2/V3) *(teurer, proprietäres Pinout)* | **ESP32-S3** *(deutlich günstiger, extrem performant, natives USB)* |
+| **Display** | 0.96 Zoll Monochrom-OLED *(winzig, anfällig für Einbrennen)* | **2.8 Zoll TFT Farb-Display** *(brillante Grafiken, Touch-Option, perfekte Lesbarkeit)* |
+| **Betriebssicherheit** | Keine Schutzschaltung *(Servo-Spitzen können ESP-Resets auslösen)* | **Integrierte Pufferkondensatoren** *(Spannungsstabilisierung & Brownout-Schutz)* |
+| **Komfort** | Stecken/Ziehen der Stromversorgung | **Dedizierter Hardware-An/Aus-Schalter** *(schnelle & sichere Bedienung)* |
+| **Konnektivität** | Rein offline / lokale Bedienung | **Integrierter Webserver** *(Live-Tracking, Füllstatistiken & Datenexport)* |
+| **Datenverwaltung** | Keine | **CSV/Excel-Download** *aller relevanten Abfülldaten (Chargen-Protokollierung)* |
 
-In order to setup a development environment on your workstation, please head over
-to the [development sandbox] documentation. When you see the software tests succeed,
-you should be ready to start hacking.
+---
 
-### Software and Hardware
+## 🛠️ Die neuen Key-Features im Detail
 
-- [Firmware source code repository]
-- [Hardware model and design files]
+### 📱 2.8 Zoll Farb-Display (TFT)
+Das winzige monochrome Display weicht einem brillanten Farb-Bildschirm. Dies ermöglicht:
+* **Farbkodierte Statusanzeigen** (z. B. *Grün* = Startklar, *Gelb* = Abfüllung läuft, *Rot* = Fehler/Not-Aus).
+* **Dynamische Fortschrittsbalken** während des Füllvorgangs.
+* **Mehr Platz für wichtige Informationen** wie Tara-Gewicht, Tageszähler, Chargennummer und Servowinkel auf einen Blick.
 
-### Community
+### 🧠 ESP32-S3 Powerhouse
+Durch den Wechsel auf den ESP32-S3 erzielen wir signifikante Vorteile:
+* **Drastische Kosteneinsparung** gegenüber dem teuren Heltec-Board.
+* **Native USB-Unterstützung** für kinderleichtes Flashen und Debuggen.
+* **Mehr Speicher (Flash/PSRAM)** für die Unterbringung des Webservers und schöner Grafiken.
 
-- [Discussion forum at Hiveeyes]
+### 🛡️ Hardware-Security & Ausfallsicherheit
+Servomotoren ziehen beim Anfahren kurzzeitig sehr hohe Ströme. Beim originalen Aufbau führte dies nicht selten zu Spannungsabfällen (Brownouts), die den Mikrocontroller mitten im Betrieb abstürzen ließen – verheerend während eines laufenden Abfüllvorgangs!
+* **Pufferkondensatoren:** Eine durchdachte Schutzbeschaltung puffert Stromspitzen zuverlässig ab.
+* **Sicherer Betrieb:** Maximale Zuverlässigkeit, selbst bei schwergängigen Quetschhähnen oder schnellen Servobewegungen.
 
-  [de] Viele weitere Informationen, Anleitungen und Handreichungen zum Nachbau des HaniMandl.
-  <br/>
-  [en] Lots more information, instructions and handouts for rebuilding the HaniMandl.
+### 🎛️ Komfort & Smart-Home Integration
+* **On/Off-Switch:** Ein echter physikalischer Schalter schützt die Elektronik und sorgt für eine ergonomische Handhabung direkt am Gerät.
+* **Webserver & Live-Dashboard:** Über das lokale WLAN des HaniMandl lässt sich ein interaktives Dashboard aufrufen. Hier siehst du live das Füllgewicht, die Anzahl der abgefüllten Gläser und die aktuelle Füllgeschwindigkeit.
+* **Datendownload:** Alle abgefüllten Chargen werden protokolliert und können zur Dokumentation (Lebensmittelhygiene-Verordnung!) direkt als **Excel/CSV-Tabelle heruntergeladen** werden.
 
-- [Facebook group »Imkerei und Technik. Eigenbau«]
+---
 
-  [de] Diskussionen über Code, Infos zur Hardware, Fotos, und Videos.
-  <br/>
-  [en] More discussions about code, hardware info, photos, and videos.
+## 🗺️ Roadmap / Meilensteine
 
-### License
+Wir haben große Pläne für HaniMandl-resync. Die Entwicklung ist in klare, aufeinander aufbauende Phasen unterteilt:
 
-The HaniMandl firmware is available under the open source "GPLv3"
-license, see [LICENSE] file. For earlier versions and some current
-derivatives, different licenses apply.
+```
+📍 Phase 1: Die neue Basis (ESP32-S3 Portierung & PioArduino)
+       │
+       ▼
+🎨 Phase 2: Visualisierung & UI-Design (2.8" TFT Farb-Display)
+       │
+       ▼
+🌐 Phase 3: Webserver & Data Tracking (Live-Dashboard & Export)
+       │
+       ▼
+🔌 Phase 4: Hardware-Reife (Eigenes PCB & 3D-Druck-Gehäuse)
+```
 
+<details>
+<summary>📊 Interaktives Mermaid-Diagramm einblenden (für GitHub / kompatible Viewer)</summary>
 
-[Create an issue]: https://github.com/hiveeyes/hanimandl/issues
-[development sandbox]: https://hanimandl.readthedocs.io/en/latest/sandbox.html
-[Discussion forum at Hiveeyes]: https://community.hiveeyes.org/t/hanimandl-halbautomatischer-honig-abfull-roboter/768
-[Facebook group »Imkerei und Technik. Eigenbau«]: https://www.facebook.com/groups/139671009967454
-[Firmware source code repository]: https://github.com/hiveeyes/hanimandl
-[HaniMandl Documentation]: https://hanimandl.readthedocs.io/
-[Hardware model and design files]: https://github.com/hiveeyes/hanimandl-hardware
-[LICENSE]: ./LICENSE
+```mermaid
+graph TD
+    A["Phase 1: Hardware-Portierung"] --> B["Phase 2: UI-Revolution"]
+    B --> C["Phase 3: Web-Konnektivität"]
+    C --> D["Phase 4: OpenHardware-Shield & Case"]
+```
+
+</details>
+
+### 📍 Phase 1: Die neue Basis (In Arbeit)
+* [ ] **Portierung des Codes** auf den ESP32-S3 unter PioArduino (fork von PlatformIO).
+* [ ] Integration und Test des HX711-Treibers sowie der neuen Servo-Bibliotheken für den S3.
+* [ ] Aufbau des grundlegenden Pin-Mappings für den kostengünstigen ESP32-S3.
+
+### 🎨 Phase 2: Visualisierung & UI-Design
+* [ ] Implementierung der Grafik-Bibliothek (z.B. TFT_eSPI / LVGL) für das **2.8" Farbdisplay**.
+* [ ] Design eines intuitiven, modernen User-Interfaces mit gut ablesbaren Schriftarten und klaren grafischen Elementen.
+* [ ] Unterstützung von optionaler Touch-Bedienung zur Navigation in den Menüs.
+
+### 🌐 Phase 3: Der Webserver & Data Tracking
+* [ ] Implementierung eines **asynchronen Webservers** direkt auf dem ESP32-S3.
+* [ ] Bereitstellung eines Live-Dashboards (WebSockets) zur Echtzeit-Visualisierung der Waage und des Füllstatus im Browser (Smartphone/Tablet/PC).
+* [ ] Integration eines Dateisystem-basierten Logs (LittleFS) zur Speicherung aller Abfüllungen pro Charge.
+* [ ] Exportfunktion für Füllprotokolle als **CSV- / Excel-kompatible Datei**.
+
+### 🔌 Phase 4: Hardware-Reife (OpenHardware Shield)
+* [ ] Design eines maßgeschneiderten **HaniMandl-resync PCBs (Platine)**, das den ESP32-S3, die Kondensatorschaltung, den On/Off-Switch und Steckplätze für Waage/Servo sauber vereint (kein Kabelsalat mehr!).
+* [ ] Entwurf eines modernen, modularen **3D-Druck-Gehäuses**, welches das 2.8" Farbdisplay und den Hauptschalter ergonomisch einfasst.
+
+---
+
+## 🤝 Mitmachen!
+
+HaniMandl-resync lebt von der Community. Wenn du Ideen hast, Fehler findest oder uns bei der Entwicklung (sei es Software, Platinendesign oder 3D-Gehäusedruck) unterstützen möchtest:
+
+1. **Fork** das Repository.
+2. Erstelle einen **Feature Branch** (`git checkout -b feature/NeuesFeature`).
+3. Sende uns einen **Pull Request**.
+
+> [!NOTE]
+> Gemeinsam machen wir das Imkern noch smarter, sicherer und komfortabler! 🐝
+
+---
+
+### Lizenz
+Dieses Projekt lizenziert sich unter der bewährten **GNU General Public License v3.0** (GPL-3.0). Details findest du in der [LICENSE](file:///Users/joshua/Desktop/hanimandl-resync/hanimandl-resync/LICENSE) Datei.
